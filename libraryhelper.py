@@ -41,3 +41,19 @@ def help(obj,function_name):
 	print temp.__doc__
 	
 
+def paramhelp(func,local=False):
+	"""Prints the number of parameters the fucntions has
+	If local is set to True, prints the local parameters used in the function as well"""
+	try:
+		no_of_param=func.__code__.co_argcount
+	except Exception as e:
+		raise Exception("Invalid function name, no such function exists")
+	param=func.__code__.co_varnames
+	print "Parameters are:"
+	for i in xrange(no_of_param):
+		print param[i]
+	if local:
+		print "Locally used variables are:"
+		print "\n".join(param[no_of_param:])
+	else:
+		return
